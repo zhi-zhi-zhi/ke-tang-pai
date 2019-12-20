@@ -1,4 +1,6 @@
 # ke-tang-pai
+## introduce
+谭强，大三上，JavaEE
 
 ## Project setup
 ```

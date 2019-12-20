@@ -1,3 +1,7 @@
+// copy from ant-design-pro-vue
+// 0 | 'off': close rule
+// 1 | 'warn': open rule with warn
+// 2 | 'error': open rule with error
 module.exports = {
   root: true,
   env: {
@@ -43,10 +47,11 @@ module.exports = {
     ],
     'semi': [
       2,
-      'never',
-      {
-        'beforeStatementContinuationChars': 'never'
-      }
+      'always',
+    ],
+    'comma-dangle': [
+      2,
+      'always-multiline'
     ],
     'no-delete-var': 2,
     'prefer-const': [
@@ -54,6 +59,10 @@ module.exports = {
       {
         'ignoreReadBeforeAssign': false
       }
+    ],
+    'space-before-function-paren': [
+      2,
+      'never'
     ]
   },
   parserOptions: {
@@ -70,4 +79,4 @@ module.exports = {
       }
     }
   ]
-}
+};

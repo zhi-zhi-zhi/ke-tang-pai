@@ -1,5 +1,6 @@
-import api from './index';
 import { axios } from '@/utils/request';
+
+import api from '@/api';
 
 /**
  * todo: 整个api这个模块，找时间用 TS 重构一下
@@ -12,7 +13,7 @@ import { axios } from '@/utils/request';
  * @param parameter
  * @returns {AxiosPromise}
  */
-export function login(parameter) {
+export function auth(parameter) {
   return axios({
     url: api.auth.login,
     method: 'post',
@@ -44,9 +45,8 @@ export function logout(parameter) {
  */
 export function getSmsCaptcha(parameter) {
   return axios({
-    url: api.auth.sms,
-    method: 'ost',
-    data: parameter,
+    url: `${api.auth.smsCaptcha}?mobile=${parameter.mobile}`,
+    method: 'get',
   });
 }
 
@@ -55,6 +55,7 @@ export function getSmsCaptcha(parameter) {
  */
 export function getImageCaptcha() {
   return axios({
-    url: api.auth.sendImage
-  })
+    url: api.auth.imageCaptcha,
+    method: 'get',
+  });
 }
