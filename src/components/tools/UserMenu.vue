@@ -60,7 +60,7 @@ export default {
           return this.Logout({}).then(() => {
             setTimeout(() => {
               window.location.reload();
-            }, 16);
+            }, 1000);
           }).catch(err => {
             this.$message.error({
               title: '错误',

@@ -6,6 +6,7 @@ import { asyncRoutes, constantRoutes } from '@/config/router.config';
  * @param permissions
  * @param route
  */
+// eslint-disable-next-line no-unused-vars
 function hasPermission(permissions, route) {
   if (route.meta && route.meta.permission) {
     let flag = false;
@@ -41,13 +42,15 @@ function hasRole(roles, route) {
  */
 function filterAsyncRoutes(routeMap, roles) {
   return routeMap.filter(route => {
-    if (hasPermission(roles.permissionList, route)) {
-      if (route.children && route.children.length) {
-        route.children = filterAsyncRoutes(route.children, roles);
-      }
-      return true;
-    }
-    return false;
+    // 后端暂时没写
+    // if (hasPermission(roles.permissionList, route)) {
+    //   if (route.children && route.children.length) {
+    //     route.children = filterAsyncRoutes(route.children, roles);
+    //   }
+    //   return true;
+    // }
+    // return false;
+    return true;
   });
 }
 

@@ -21,9 +21,17 @@ import {
   Badge,
   List,
   Spin,
+  Modal,
+  Card,
+  Breadcrumb,
   message,
   notification,
 } from 'ant-design-vue';
+
+// import { SlickList, SlickItem } from 'vue-slicksort';
+//
+// Vue.use(SlickList);
+// Vue.use(SlickItem);
 
 Vue.use(Checkbox);
 Vue.use(Button);
@@ -45,8 +53,12 @@ Vue.use(Menu);
 Vue.use(Badge);
 Vue.use(List);
 Vue.use(Spin);
+Vue.use(Modal);
+Vue.use(Card);
+Vue.use(Breadcrumb);
 Vue.use(message);
 Vue.use(notification);
 
 Vue.prototype.$notification = notification;
 Vue.prototype.$message = message;
+Vue.prototype.$confirm = Modal.confirm;

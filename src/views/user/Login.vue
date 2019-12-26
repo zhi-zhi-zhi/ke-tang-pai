@@ -18,13 +18,13 @@
             type="error"
             showIcon
             style="margin-bottom: 24px;"
-            message="账户或密码错误（admin/ant.design )"
+            message="账户或密码错误（ktp00000001/123456)"
           />
           <a-form-item>
             <a-input
               size="large"
               type="text"
-              placeholder="账户: tq"
+              placeholder="账户: ktp00000001"
               v-decorator="[
                 'username',
                 {rules: [{ required: true, message: '请输入帐户名或邮箱地址' },
@@ -41,7 +41,7 @@
               size="large"
               type="password"
               autocomplete="false"
-              placeholder="密码: welcome!"
+              placeholder="密码: 123456"
               v-decorator="[
                 'password',
                 {rules: [{ required: true, message: '请输入密码' }], validateTrigger: 'blur'}
@@ -114,10 +114,10 @@
       <div class="user-login-other">
         <span>其他登录方式</span>
         <a>
-          <a-icon class="item-icon" type="alipay-circle"></a-icon>
+          <a-icon class="item-icon" type="alipay-circle"/>
         </a>
         <a>
-          <a-icon class="item-icon" type="weibo-circle"></a-icon>
+          <a-icon class="item-icon" type="weibo-circle"/>
         </a>
         <router-link class="register" :to="{ name: 'register' }">注册账户</router-link>
       </div>
@@ -131,6 +131,8 @@ import md5 from 'md5';
 import { mapActions } from 'vuex';
 import { timeFix } from '@/utils/util';
 import { getSmsCaptcha } from '@/api/auth';
+// eslint-disable-next-line no-unused-vars
+import { axios } from '@/utils/request';
 
 export default {
   data() {
@@ -175,8 +177,11 @@ export default {
 
       state.loginBtn = true;
 
-      const validateFieldsKey = customActiveKey === 'tab1' ? ['username', 'password'] : ['mobile', 'captcha'];
+      const validateFieldsKey = customActiveKey === 'tab1' ? ['username', 'password', 'rememberMe'] : [
+        'mobile', 'captcha',
+      ];
 
+      // axios({ url: '/api/gifCode', method: 'get' });
       validateFields(validateFieldsKey, { force: true }, (err, values) => {
         if (!err) {
           console.log('auth form', values);

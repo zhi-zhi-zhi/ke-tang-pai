@@ -1,7 +1,7 @@
 <template>
   <a-layout :class="['layout', 'desktop']">
     <!-- layout header-->
-    <a-layout :class="['topmenu', 'content-width-Fixed']" :style="{ paddingLeft: '80px', minHeight: '100vh' }">
+    <a-layout :class="['topmenu', 'content-width-Fixed']" :style="{ paddingLeft: '0', minHeight: '100vh' }">
 <!--    <a-layout :class="['topmenu', 'content-width-Fluid']" :style="{ paddingLeft: '80px', minHeight: '100vh' }">-->
       <global-header/>
 

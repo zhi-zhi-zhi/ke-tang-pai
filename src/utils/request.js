@@ -4,6 +4,7 @@ import store from '@/store';
 
 import { VueAxios } from '@/utils/axios';
 import { ACCESS_TOKEN } from '@/store/mutation-types';
+import notification from 'ant-design-vue/es/notification';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -26,7 +27,7 @@ const codeMessage = {
 // 创建 axios 实例，设置基本参数
 const service = axios.create({
   baseURL: process.env.VUE_APP_APi_BASE_URL, // api base_url
-  timeout: 6000, // 超时时间
+  timeout: 50000, // 超时时间
 });
 
 // 服务器 401 403 500 和其他错误处理
@@ -34,11 +35,11 @@ const err = (error) => {
   const { response } = error;
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText || 'error';
-    const { status, url } = response;
+    const { status } = response;
 
-    Vue.$notification.error({
-      message: `请求错误 ${status}: ${url}`,
-      description: errorText,
+    notification.error({
+      message: `请求错误 ${status}: ${errorText}`,
+      description: response.data.message || '',
     });
 
     const token = Vue.ls.get(ACCESS_TOKEN);
@@ -50,7 +51,7 @@ const err = (error) => {
       });
     }
   } else if (!response) {
-    Vue.$notification.error({
+    notification.error({
       message: '您的网络发生异常，无法连接服务器',
       description: '网络异常',
     });

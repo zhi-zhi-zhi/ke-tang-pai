@@ -13,7 +13,7 @@ import api from '@/api';
  * @param parameter
  * @returns {AxiosPromise}
  */
-export function auth(parameter) {
+export function login(parameter) {
   return axios({
     url: api.auth.login,
     method: 'post',
