@@ -24,6 +24,11 @@ import {
   Modal,
   Card,
   Breadcrumb,
+  Switch,
+  DatePicker,
+  Upload,
+  Table,
+  Tag,
   message,
   notification,
 } from 'ant-design-vue';
@@ -56,6 +61,11 @@ Vue.use(Spin);
 Vue.use(Modal);
 Vue.use(Card);
 Vue.use(Breadcrumb);
+Vue.use(Switch);
+Vue.use(DatePicker);
+Vue.use(Upload);
+Vue.use(Table);
+Vue.use(Tag);
 Vue.use(message);
 Vue.use(notification);
 

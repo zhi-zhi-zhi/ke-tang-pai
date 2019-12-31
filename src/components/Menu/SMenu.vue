@@ -18,7 +18,7 @@
       </a-menu-item>
       <a-menu-item key="my-boutique">
         <router-link :to="{name:'classroom-index'}">
-          <span><a-icon type="home"/>我的精品</span>
+          <span><a-icon type="smile" theme="twoTone" />我的作业</span>
         </router-link>
       </a-menu-item>
     </a-menu>

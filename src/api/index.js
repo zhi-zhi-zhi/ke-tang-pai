@@ -1,10 +1,11 @@
 const api = {
+  SendSms: '/account/sms',
   auth: {
     login: '/api/auth/login',
     logout: '/api/auth/logout',
     forgetPassword: '/api/auth/forget-password',
     register: '/api/auth/register',
-    smsCaptcha: '/api/auth/sms',
+    smsCaptcha: '/auth/sms',
     imageCaptcha: '/api/auth/image',
   },
 
@@ -18,6 +19,7 @@ const api = {
     createCourse: '/api/system/user/courses/create',
     joinCourse: '/api/system/user/courses/join',
     coursesOfPigeonhole: '/api/system/user/courses/pigeonhole',
+    file: '/api/system/user/file',
   },
 };
 

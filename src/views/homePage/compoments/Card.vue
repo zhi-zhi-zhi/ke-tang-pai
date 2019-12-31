@@ -2,7 +2,7 @@
   <a-card :hoverable="true" style="width: 270px;">
     <div class="ktp-card-content" slot="cover">
       <strong class="ktp-card-bgstrong">
-        <router-link :to="{name: 'home-page'}">
+        <router-link :to="{name: 'course-detail', params: {courseId: course.id}}">
           <span class="ktp-card-course-title">{{ course.coursename }}</span>
         </router-link>
         <span class="ktp-card-course-class">{{ course.classname }}</span>
@@ -33,7 +33,9 @@
         <a-list rowKey="id" :data-source="course.homework">
           <a-list-item slot="renderItem" slot-scope="item">
             <template v-if="(item && item.id !== undefined)">
-              <a-list-item-meta :description="item.title"/>
+              <router-link :to="{name: course.owner?'studentHomework':'submitHomework', params:{courseId: course.id,homeworkId:item.id}}">
+                <a-list-item-meta :description="item.title"/>
+              </router-link>
             </template>
             <template v-else>
               <a-list-item-meta>
@@ -154,6 +156,13 @@ export default {
 <style lang="less" scoped>
   @import "~@/components/index.less";
 
+  .ant-list-item-meta-description {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 120px;
+  }
+
   .card-avatar {
     width: 48px;
     height: 48px;
@@ -214,6 +223,10 @@ export default {
       /*border-bottom: 1px solid #fff;   */
       white-space: nowrap;
       text-overflow: ellipsis;
+    }
+
+    .ktp-card-course-title:hover {
+      text-decoration: underline;
     }
 
     .ktp-card-course-class {

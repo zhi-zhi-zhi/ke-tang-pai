@@ -9,7 +9,7 @@
           </a>
         </div>
         <div class="desc">
-          Ant Design 是西湖区（全宇宙）最具影响力的 Web 设计规范，学它准没错
+          Ant Design 是西湖区最具影响力的 Web 设计规范&nbsp;<a-icon type="smile" theme="twoTone"/>
         </div>
       </div>
 

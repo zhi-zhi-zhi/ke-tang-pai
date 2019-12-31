@@ -1,4 +1,4 @@
-import { axios } from '@/utils/request';
+import { myAxios } from '@/utils/request';
 
 import api from '@/api';
 
@@ -14,7 +14,7 @@ import api from '@/api';
  * @returns {AxiosPromise}
  */
 export function login(parameter) {
-  return axios({
+  return myAxios({
     url: api.auth.login,
     method: 'post',
     data: parameter,
@@ -28,7 +28,7 @@ export function login(parameter) {
  * @returns {AxiosPromise}
  */
 export function logout(parameter) {
-  return axios({
+  return myAxios({
     url: api.auth.logout,
     method: 'post',
     data: parameter,
@@ -44,18 +44,19 @@ export function logout(parameter) {
  * @returns {AxiosPromise}
  */
 export function getSmsCaptcha(parameter) {
-  return axios({
-    url: `${api.auth.smsCaptcha}?mobile=${parameter.mobile}`,
-    method: 'get',
+  return myAxios({
+    url: api.SendSms,
+    method: 'post',
+    data: parameter,
   });
 }
 
-/**
- * 获取图片验证码
- */
-export function getImageCaptcha() {
-  return axios({
-    url: api.auth.imageCaptcha,
-    method: 'get',
-  });
-}
+// /**
+//  * 获取图片验证码
+//  */
+// export function register() {
+//   return myAxios({
+//     url: api.auth.imageCaptcha,
+//     method: 'get',
+//   });
+// }

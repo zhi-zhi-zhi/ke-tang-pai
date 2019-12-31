@@ -1,113 +1,154 @@
 <template>
-  <div class="course">
-    <div class="course-header">
-      <a class="course-header-select-theme" href="javascript:void(0);">
-        <a-icon type="skin"/>
-        更改背景
-      </a>
-      <div class="course-header-content">
-        <h1 data-semester="2019-2020" data-term="1" style="padding-top: 0;padding-bottom: 5px">测试课堂<i></i></h1>
-        <h2>我想我还是怀念React+antd的日子</h2>
-        <!--             <div class="codetip">使用以下邀请码邀请学生加课</div> -->
-        <div class="course-header-content-box">
-          <div class="course-header-content-box-item">
-            <div class="course-header-content-box-code">
-              <a-icon type="qrcode"/>
-              加课码：{{ 'TY94UW' }}
+  <page-view title="课程详情" logo="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png">
+
+    <!-- actions -->
+    <template slot="action">
+      <router-link :to="{name: 'classroom'}">
+        <a-button-group style="margin-right: 4px;">
+          <a-button>回到首页</a-button>
+        </a-button-group>
+      </router-link>
+    </template>
+
+    <div class="course">
+      <div class="course-header">
+        <a class="course-header-select-theme" href="javascript:void(0);">
+          <a-icon type="skin"/>
+          更改背景
+        </a>
+        <div class="course-header-content">
+          <h1 data-semester="2019-2020" data-term="1" style="padding-top: 0;padding-bottom: 5px">测试课堂<i></i></h1>
+          <h2>{{ courseDetails.coursename }}</h2>
+          <!--             <div class="codetip">使用以下邀请码邀请学生加课</div> -->
+          <div class="course-header-content-box">
+            <div class="course-header-content-box-item">
+              <div class="course-header-content-box-code">
+                <a-icon type="qrcode"/>
+                加课码：{{ courseDetails.code }}
+              </div>
+            </div>
+
+            <router-link :to="{name:''}">
+              <div class="course-header-content-box-item">
+                <div class="course-header-content-box-code">
+                  <a-icon type="user"/>
+                  成员：{{ courseDetails.studentsCount }}
+                </div>
+              </div>
+            </router-link>
+
+            <router-link :to="{name:''}">
+              <div class="course-header-content-box-item">
+                <div class="course-header-content-box-code">
+                  <a-icon type="pie-chart"/>
+                  数据分析
+                </div>
+              </div>
+            </router-link>
+
+            <router-link :to="{name: ''}">
+              <div class="course-header-content-box-item">
+                <div class="course-header-content-box-code">
+                  <a-icon type="check"/>
+                  成绩
+                </div>
+              </div>
+            </router-link>
+
+            <div class="course-header-content-box-data" style="float: right">
+              <ul>
+                <li style="display:block">0</li>
+                <li>互动个数</li>
+              </ul>
+              <ul>
+                <li style="display:block">{{ courseDetails.homeworkCount }}</li>
+                <li>发布作业</li>
+              </ul>
+              <ul>
+                <li style="display:block">0</li>
+                <li>发布测试</li>
+              </ul>
             </div>
           </div>
 
-          <router-link :to="{name:''}">
-            <div class="course-header-content-box-item">
-              <div class="course-header-content-box-code">
-                <a-icon type="user"/>
-                成员：{{ '1' }}
-              </div>
-            </div>
-          </router-link>
-
-          <router-link :to="{name:''}">
-            <div class="course-header-content-box-item">
-              <div class="course-header-content-box-code">
-                <a-icon type="pie-chart"/>
-                数据分析
-              </div>
-            </div>
-          </router-link>
-
-          <router-link :to="{name: ''}">
-            <div class="course-header-content-box-item">
-              <div class="course-header-content-box-code">
-                <a-icon type="check"/>
-                成绩
-              </div>
-            </div>
-          </router-link>
-
-          <div class="course-header-content-box-data" style="float: right">
-            <ul>
-              <li style="display:block">0</li>
-              <li>互动个数</li>
-            </ul>
-            <ul>
-              <li style="display:block">0</li>
-              <li>发布作业</li>
-            </ul>
-            <ul>
-              <li style="display:block">0</li>
-              <li>发布测试</li>
-            </ul>
-          </div>
         </div>
-
       </div>
-    </div>
-    <div class="course-banner">
-      <a-menu v-model="current" mode="horizontal">
-        <a-menu-item key="class-interaction">
-          <router-link :to="{name:'classroom-index'}">
-            <span>课堂互动</span>
-          </router-link>
-        </a-menu-item>
-        <a-menu-item key="homework">
-          <router-link :to="{name:'classroom-index'}">
-            <span>作业</span>
-          </router-link>
-        </a-menu-item>
-        <a-menu-item key="topic">
-          <router-link :to="{name:'classroom-index'}">
-            <span>话题</span>
-          </router-link>
-        </a-menu-item>
-        <a-menu-item key="datum">
-          <router-link :to="{name:'classroom-index'}">
-            <span>资料</span>
-          </router-link>
-        </a-menu-item>
-        <a-menu-item key="test">
-          <router-link :to="{name:'classroom-index'}">
-            <span>测试</span>
-          </router-link>
-        </a-menu-item>
-        <a-menu-item key="announcement">
-          <router-link :to="{name:'classroom-index'}">
-            <span>公告</span>
-          </router-link>
-        </a-menu-item>
-      </a-menu>
-    </div>
 
-    <router-view />
+      <div class="course-banner">
+        <a-menu v-model="current" mode="horizontal">
+          <a-menu-item key="class-interaction">
+            <router-link :to="{name:'classroom-index'}">
+              <span>课堂互动</span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="homework">
+            <router-link :to="{name:'classroom-index'}">
+              <span>作业</span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="topic">
+            <router-link :to="{name:'classroom-index'}">
+              <span>话题</span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="datum">
+            <router-link :to="{name:'classroom-index'}">
+              <span>资料</span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="test">
+            <router-link :to="{name:'classroom-index'}">
+              <span>测试</span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="announcement">
+            <router-link :to="{name:'classroom-index'}">
+              <span>公告</span>
+            </router-link>
+          </a-menu-item>
+        </a-menu>
+      </div>
 
-  </div>
+      <router-view/>
+
+    </div>
+  </page-view>
+
 </template>
 <script>
+import PageView from '@/layout/PageView';
+import { getCourseDetails } from '@/api/user';
+
 export default {
   name: 'CourseDetail',
+  components: {
+    PageView,
+  },
   data() {
     return {
-      current: 'homework',
+      current: ['homework'],
+      courseId: null,
+      courseDetails: {
+        studentsCount: null,
+        homeworkCount: null,
+        code: null,
+        coursename: null,
+        classname: null,
+      },
     };
+  },
+  mounted() {
+    this.courseId = this.$route.params.courseId;
+    this.getCourseDetails();
+  },
+  methods: {
+    async getCourseDetails() {
+      const result = await getCourseDetails(this.courseId);
+
+      if (result.code === 1) {
+        this.courseDetails = result.data;
+      }
+    },
   },
 };
 </script>
@@ -233,8 +274,9 @@ export default {
 
       ul {
         height: 72px;
-        line-height:  68px;
+        line-height: 68px;
         padding-left: 30px;
+
         span {
 
           min-width: 80px;

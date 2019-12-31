@@ -4,6 +4,9 @@ import BasicLayout from '@/layout/BasicLayout';
 // eslint-disable-next-line no-unused-vars
 import PageView from '@/layout/PageView';
 import RouteView from '@/layout/RouteView';
+import { courseDetailUse, courseHomeworkListUse } from '@/routerHoc/routeReplaceSelf';
+import CourseDetail from '@/views/courseDetail/CourseDetail';
+import HomeworkList from '@/views/courseDetail/views/homework/HomeworkList';
 
 /**
  * todo：异步路由
@@ -30,11 +33,12 @@ export const asyncRoutes = [
             meta: { title: '课堂首页', keepAlive: true },
           },
           {
-            path: '/classroom/course',
+            path: '/classroom/:courseId',
             name: 'course-detail',
-            component: () => import('@/views/courseDetail/CourseDetail'),
+            // component: () => import('@/views/courseDetail/CourseDetail'),
+            component: courseDetailUse(CourseDetail),
             meta: { title: '课程详情页', keepAlive: true },
-            redirect: '/classroom/homework',
+            redirect: '/classroom/:courseId/homework',
             children: [
               {
                 path: '/classroom/course/class-interaction',
@@ -43,10 +47,37 @@ export const asyncRoutes = [
                 component: RouteView,
               },
               {
-                path: '/classroom/course/homework',
-                name: 'homework',
-                meta: { title: '作业' },
-                component: () => import('@/views/courseDetail/views/homework/homework'),
+                path: 'homework',
+                name: 'homeworkList',
+                meta: { title: '作业列表' },
+                // component: () => import('@/views/courseDetail/views/homework/HomeworkList'),
+                component: courseHomeworkListUse(HomeworkList),
+                children: [
+                  {
+                    path: ':homeworkId',
+                    name: 'homeworkDetail',
+                    component: () => import('@/views/myHomework/MyHomework'),
+                    redirect: ':homeworkId/submitHomework',
+                    children: [
+                      {
+                        path: 'submitHomework',
+                        meta: { title: '作业' },
+                        name: 'submitHomework',
+                        component: () => import('@/views/myHomework/views/submitHomework/SubmitHomework'),
+                      },
+                      {
+                        path: 'studentHomework',
+                        name: 'studentHomework',
+                        component: () => import('@/views/myHomework/views/studentHomework/StudentHomework'),
+                      },
+                      {
+                        path: 'homeworkDiscussion',
+                        name: 'homeworkDiscussion',
+                        component: () => import('@/views/myHomework/views/homeworkDiscussion/HomeworkDiscussion'),
+                      },
+                    ],
+                  },
+                ],
               },
               {
                 path: '/classroom/course/topic',
@@ -73,6 +104,12 @@ export const asyncRoutes = [
                 component: RouteView,
               },
             ],
+          },
+          {
+            path: '/classroom/homework/:courseId',
+            name: 'my-homework',
+            meta: { title: '我的作业' },
+            component: () => import('@/views/myHomework/MyHomework'),
           },
         ],
       },

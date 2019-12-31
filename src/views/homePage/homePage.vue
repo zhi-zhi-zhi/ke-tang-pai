@@ -19,7 +19,7 @@
       </a-button-group>
     </template>
 
-    <div ref="content">
+    <div>
       <a-card v-if="topList.length > 0 " class="card" title="置顶课程" :bordered="false">
         <card-list :course-list="topList" :is-tpo-list="true"/>
       </a-card>

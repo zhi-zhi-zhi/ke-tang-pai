@@ -6,6 +6,9 @@ import { VueAxios } from '@/utils/axios';
 import { ACCESS_TOKEN } from '@/store/mutation-types';
 import notification from 'ant-design-vue/es/notification';
 
+// eslint-disable-next-line no-unused-vars
+import qs from 'qs';
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -23,6 +26,20 @@ const codeMessage = {
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
 };
+
+// axios.defaults.transformRequest = [
+//   function(data, headers) {
+//     if (headers['Content-Type'] === 'application/x-www-form-urlencoded') {
+//       // 把一个参数对象格式化为一个字符串
+//       return qs.stringify(data);
+//     } else if (headers['Content-Type'] === 'multipart/form-data;charset=UTF-8') {
+//       return data;
+//     } else {
+//       headers['Content-Type'] = 'application/json';
+//     }
+//     return JSON.stringify(data);
+//   },
+// ];
 
 // 创建 axios 实例，设置基本参数
 const service = axios.create({
@@ -86,5 +103,5 @@ const installer = {
 
 export {
   installer as VueAxios,
-  service as axios,
+  service as myAxios,
 };

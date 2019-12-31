@@ -3,8 +3,8 @@
   <div :style="!$route.meta.hiddenHeaderContent ? 'margin: -24px -24px 0px;' : null">
     <!-- pageHeader , route meta :true on hide -->
     <page-header v-if="!$route.meta.hiddenHeaderContent" :title="pageTitle" :logo="logo" :avatar="avatar">
-      <slot slot="action" name="action"></slot>
-      <slot slot="content" name="headerContent"></slot>
+      <slot slot="action" name="action" />
+      <slot slot="content" name="headerContent" />
       <div slot="content" v-if="!this.$slots.headerContent && description">
         <p style="font-size: 14px;color: rgba(0,0,0,.65)">{{ description }}</p>
         <div class="link">
@@ -38,6 +38,7 @@
         </div>
       </div>
     </page-header>
+
     <div class="content">
       <div class="page-header-index-wide">
         <slot>

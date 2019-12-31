@@ -7,8 +7,17 @@
         <a-input
           size="large"
           type="text"
-          placeholder="邮箱"
-          v-decorator="['email', {rules: [{required: true, type: 'email', message: '请输入邮箱'}], validateTrigger: ['change', 'blur']}]"
+          placeholder="账户"
+          v-decorator="['account', {rules: [{required: true, message: '请输入账户'}], validateTrigger: ['change', 'blur']}]"
+        />
+      </a-form-item>
+
+      <a-form-item>
+        <a-input
+          size="large"
+          type="text"
+          placeholder="用户名"
+          v-decorator="['username', {rules: [{required: true, message: '请输入用户名'}], validateTrigger: ['change', 'blur']}]"
         />
       </a-form-item>
 
@@ -59,7 +68,7 @@
         />
       </a-form-item>
 
-      <a-form-item >
+      <a-form-item>
         <a-input
           size="large"
           type="text"
@@ -131,6 +140,7 @@
 <script>
 
 import { getSmsCaptcha } from '@/api/auth';
+import { register } from '@/api/user';
 
 const levelNames = {
   0: '低',
@@ -241,7 +251,6 @@ export default {
       this.state.passwordLevelChecked = true;
     },
 
-    // todo: 注册接口未完成
     handleSubmit(e) {
       e.preventDefault();
       const {
@@ -249,10 +258,15 @@ export default {
         // $router,
       } = this;
       // force: true 暂时还不知道啥意思
-      validateFields({ force: true }, (err, values) => {
+      validateFields({ force: true }, async(err, values) => {
         if (!err) {
           state.passwordLevelChecked = false;
           console.log(values);
+          const result = await register(values);
+
+          if (result.code === 1) {
+            this.$notification.success({ message: '注册成功！' });
+          }
           // $router.push({ name: 'registerResult', params: { ...values } });
         } else {
           console.log(err);

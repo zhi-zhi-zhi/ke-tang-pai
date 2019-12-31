@@ -132,7 +132,7 @@ import { mapActions } from 'vuex';
 import { timeFix } from '@/utils/util';
 import { getSmsCaptcha } from '@/api/auth';
 // eslint-disable-next-line no-unused-vars
-import { axios } from '@/utils/request';
+import { myAxios } from '@/utils/request';
 
 export default {
   data() {
